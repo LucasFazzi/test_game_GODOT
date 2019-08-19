@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Script/Enemy1.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/ghost_enemy_right-1.png.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/ghost_enemy_right-2.png.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/ghost_enemy_left-1.png.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/ghost_enemy_left-2.png.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "right",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "left",
+"speed": 3.0
+} ]
+
+[node name="Enemyleftandright" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "left"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.250343, 0.250343 )
+polygon = PoolVector2Array( -25.4148, 14.8111, -25.6408, 29.4969, 25.8725, 30.1747, 26.0985, 19.7817, 22.7094, 11.648, 21.3538, 5.54774, 30.1653, 5.3218, 31.9728, -8.91214, 22.4835, -8.91214, 22.4835, -22.2423, 5.76427, -29.9241, -15.4737, -30.602, -24.5111, -19.5311, -23.8333, -10.0418, -33.0966, -10.0418, -32.6448, 2.83651, -22.4777, 4.41806 )
+
+[node name="RayCast_right" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 35, 0 )
+collision_mask = 7
+collide_with_areas = true
+
+[node name="RayCast2D_left" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -35, 0 )
+collision_mask = 7
+collide_with_areas = true

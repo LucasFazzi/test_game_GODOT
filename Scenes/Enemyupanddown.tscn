@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Script/Enemy2.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/spike enemy 2-1.png.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/spike enemy 2-2.png.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+} ]
+
+[node name="Enemyupanddown" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -1.67017 )
+frames = SubResource( 1 )
+animation = "idle"
+playing = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -33.2101, -12.2315, -25.0743, -21.1422, -13.258, -28.5032, 6.11305, -28.5032, 22.191, -25.5975, 32.4576, -8.35733, 32.8451, 7.13949, 31.6828, 16.6313, 14.83, 26.7042, 0.108032, 29.9973, -27.2051, 21.6677, -32.629, 15.2753, -33.4038, -3.32086 )
+
+[node name="raycast_up" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -35 )
+collision_mask = 7
+
+[node name="raycast_down" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 35 )
+collision_mask = 7
+collide_with_areas = true

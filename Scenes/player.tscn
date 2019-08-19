@@ -1,48 +1,70 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Script/Player.gd" type="Script" id=1]
-[ext_resource path="res://sprites/polvo_teste-1.png.png" type="Texture" id=2]
-[ext_resource path="res://sprites/polvo_teste-2.png.png" type="Texture" id=3]
-[ext_resource path="res://sprites/polvo_teste-3.png.png" type="Texture" id=4]
-[ext_resource path="res://Script/Player_hit.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/player_test_left-1.png.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/player_test_left-2.png.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/player_test_right clone-1.png.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/player_test_right clone-2.png.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/player_test_idle-1.png.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/player_test_idle-2.png.png" type="Texture" id=7]
+[ext_resource path="res://Script/Player_animation.gd" type="Script" id=8]
+[ext_resource path="res://Script/Player_hit.gd" type="Script" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "default",
+"name": "left",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "right",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
 "speed": 2.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 13.3193, 15.3878 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 13.9786, 16.1892 )
-
 [node name="player" type="KinematicBody2D"]
-position = Vector2( 333.122, 358.409 )
+position = Vector2( 349.005, 342.311 )
+scale = Vector2( 1.3, 1.3 )
 collision_mask = 7
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
-playing = true
+[node name="player_physics_collision" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -4.55576, -21.5083, -14.0774, -15.5383, -14.542, -10.6998, -13.7753, 7.37347, -12.6004, 13.7133, -7.79282, 13.8736, -4.6412, 13.8736, 5.24106, 13.8202, 9.99384, 13.836, 12.6227, 7.81161, 14.0466, -10.2617, 14.0074, -14.7688, 5.16626, -21.5083 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.263519, -1.84464 )
-shape = SubResource( 2 )
+[node name="player_animated_sprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.24765, -2.11337 )
+scale = Vector2( 0.51371, 0.51371 )
+frames = SubResource( 1 )
+animation = "idle"
+frame = 1
+playing = true
+script = ExtResource( 8 )
 
 [node name="player_hit" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
-script = ExtResource( 5 )
+script = ExtResource( 9 )
 
-[node name="enemy_collision" type="CollisionShape2D" parent="player_hit"]
-position = Vector2( -0.28479, -1.99353 )
-shape = SubResource( 3 )
+[node name="player_hit_collision" type="CollisionPolygon2D" parent="player_hit"]
+polygon = PoolVector2Array( -4.50232, -22.4165, -14.2257, -16.2264, -15.8552, -11.0873, -15.7299, 11.0359, -12.7072, 14.1407, -7.31207, 14.2475, -3.466, 14.2475, 5.45471, 14.2475, 10.7965, 14.1941, 12.6127, 13.4463, 15.4808, 9.47351, 14.7288, -15.058, 5.05942, -22.4165 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.3, 1.3 )
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 2.0
+[connection signal="anima_idle" from="." to="player_animated_sprite" method="_on_player_anima_idle"]
+[connection signal="anima_left" from="." to="player_animated_sprite" method="_on_player_anima_left"]
+[connection signal="anima_right" from="." to="player_animated_sprite" method="_on_player_anima_right"]
 [connection signal="body_entered" from="player_hit" to="player_hit" method="_on_player_hit_body_entered"]
 [connection signal="hit" from="player_hit" to="." method="_on_player_hit_hit"]
