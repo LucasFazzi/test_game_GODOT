@@ -23,8 +23,10 @@ func _physics_process(delta):
 
 	if left == true:
 		VELOCITY.x = MOVE_SPEED_LEFT_MAX
+		$Sprite.play("left")
 		VELOCITY = move_and_slide(VELOCITY).normalized()
 
 	if right == true:
 		VELOCITY.x = MOVE_SPEED_RIGHT_MAX
+		$Sprite.play("right")
 		VELOCITY = move_and_slide(VELOCITY).normalized()
