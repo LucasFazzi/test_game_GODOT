@@ -1,14 +1,47 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Script/start_lvl.gd" type="Script" id=1]
+[ext_resource path="res://SFX/start_OST.wav" type="AudioStream" id=2]
+[ext_resource path="res://Sprites/cover-1.png.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/cover-2.png.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/cover-3.png.png" type="Texture" id=5]
+[ext_resource path="res://Fonts/Minecraft.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 6 )
 
 [node name="start" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="start_OST" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 517.846, 300.97 )
+frames = SubResource( 1 )
+frame = 1
+playing = true
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 302.96
-margin_top = 256.667
-margin_right = 709.96
-margin_bottom = 486.667
-rect_scale = Vector2( 3, 3 )
-text = "GAME TEST"
+margin_left = 17.9654
+margin_top = 443.579
+margin_right = 424.965
+margin_bottom = 673.579
+custom_fonts/normal_font = SubResource( 2 )
+text = "
+WASD to move
+
+Enter to Jump
+and Start Game
+
+E to restart level"

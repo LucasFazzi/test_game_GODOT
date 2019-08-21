@@ -6,7 +6,7 @@
 [ext_resource path="res://Sprites/Background Torch Pillar clone-2.png.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Background Torch Pillar clone-3.png.png" type="Texture" id=5]
 
-[sub_resource type="AnimatedTexture" id=10]
+[sub_resource type="AnimatedTexture" id=1]
 frames = 3
 fps = 2.0
 frame_0/texture = ExtResource( 3 )
@@ -15,7 +15,7 @@ frame_1/delay_sec = 0.0
 frame_2/texture = ExtResource( 5 )
 frame_2/delay_sec = 0.0
 
-[sub_resource type="TileSet" id=9]
+[sub_resource type="TileSet" id=2]
 0/name = "chain-1.png.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -37,7 +37,7 @@ frame_2/delay_sec = 0.0
 1/shapes = [  ]
 1/z_index = 0
 2/name = "Background Torch Pillar clone-1.png.png 2"
-2/texture = SubResource( 10 )
+2/texture = SubResource( 1 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 0, 32, 32 )
@@ -49,7 +49,7 @@ frame_2/delay_sec = 0.0
 
 [node name="background" type="TileMap"]
 modulate = Color( 0.211765, 0.203922, 0.203922, 1 )
-tile_set = SubResource( 9 )
+tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 262147, 1610612736, 0, 327683, 1610612736, 0, 393219, 1610612736, 0, 458755, 1610612736, 0, 458773, 2, 0, 458777, 2, 0, 524291, 1610612736, 0, 589827, 1610612736, 0, 655363, 1610612736, 0, 655384, 1610612736, 0, 720899, 1610612736, 0, 720920, 1610612736, 0, 786456, 1610612736, 0, 851992, 1610612736, 0, 917528, 1610612736, 0, 983056, 1610612736, 0, 983058, 1610612736, 0, 1048592, 1610612736, 0, 1048594, 1610612736, 0, 1114130, 1610612736, 0, 1179666, 1610612736, 0, 1245202, 1610612736, 0, 1376258, 1, 0, 1376264, 1, 0, 1376278, 1, 0 )
