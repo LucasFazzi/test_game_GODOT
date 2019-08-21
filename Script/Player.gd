@@ -37,6 +37,7 @@ func _physics_process(delta):
 
 	y_velo += GRAVITY
 	if grounded and Input.is_action_just_pressed("jump"):
+		$jump.play()
 		y_velo = -JUMP_FORCE
 	if grounded and y_velo >= 5:
 		y_velo = 5
@@ -51,4 +52,18 @@ func _physics_process(delta):
 			emit_signal("anima_idle")
 
 func _on_player_hit_hit():
+	$player_animated_sprite.visible = false
+	if $hit.is_playing():
+		pass
+	if not $hit.is_playing():
+		$hit.play()
+	var waiting_timer = Timer.new()
+	waiting_timer.set_wait_time(0.3)
+	waiting_timer.set_one_shot(true)
+	self.add_child(waiting_timer)
+	waiting_timer.start()
+	yield(waiting_timer, "timeout")
 	get_parent().get_tree().call_deferred("reload_current_scene")
+
+func _on_player_hit_exit():
+	$player_animated_sprite.visible = false
