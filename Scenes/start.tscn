@@ -29,7 +29,7 @@ autoplay = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 517.846, 300.97 )
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
